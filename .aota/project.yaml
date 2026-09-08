@@ -1,0 +1,38 @@
+schema_version: 1
+project:
+  id: aota_forge_dogfood
+  name: AOTA Forge Dogfood
+  kind: dogfood
+  status: active
+summary: >
+  Standalone low-risk project used to validate the first production
+  AOTA Forge task-main / Worker autonomous implementation workflow.
+capabilities:
+  - dogfood
+paths:
+  source_root: .
+  source:
+    - src/
+  docs:
+    - README.md
+  scripts: []
+  profiles: []
+  skills: []
+  tests:
+    - tests/
+commands:
+  validate: []
+  deploy: []
+  verify_deploy: []
+runtime:
+  deployment_type: none
+  requires_human_checkpoint: true
+codegraph:
+  enabled: false
+  index_location: .codegraph/
+plan:
+  active_plan_id: null
+constraints:
+  - AF dogfood repository only
+  - no production deployment
+  - no network or external-service dependency
