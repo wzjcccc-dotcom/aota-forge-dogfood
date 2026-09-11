@@ -1,22 +1,32 @@
-# AOTA Forge Dogfood — Calculator CLI Trial
+# Calculator CLI
 
-Standalone low-risk project used to validate the first production AOTA Forge
-task-main / Worker autonomous implementation workflow.
+Deterministic Python calculator CLI.
 
-- `PROJECT_ID=aota_forge_dogfood`
-- `DOGFOOD_ID=AF-DOGFOOD-001`
-- `GOVERNING_REPOSITORY=wzjcccc-dotcom/aota-hermes-tools`
-- `IMPLEMENTATION_REPOSITORY=wzjcccc-dotcom/aota-forge-dogfood`
+## Usage
 
-This repository is a test target, not AF implementation authority.
-No production deployment, no network or external-service dependency.
+```bash
+calc add 1 2      # 3
+calc sub 5 3      # 2
+calc mul 4 6      # 24
+calc div 8 2      # 4
+calc add 1 2 --json  # {"result": 3}
+```
 
-## Status
+## Error handling
 
-- Plan: `[AF][DOGFOOD-001] First Autonomous Implementation Trial — Calculator CLI`
-- Current milestone: `M1 — Deterministic Calculator CLI` (awaiting user approval)
-- `M1_SOURCE_CONSTRUCTION_STARTED=no`
+- `calc div 1 0` → error, non-zero exit, division by zero
+- `calc add foo 2` → error, invalid numeric input
 
-Implementation (`src/calculator`, CLI, tests) must be performed by AF
-`task-main` / Workers after explicit user M1 approval. This bootstrap commit
-is setup baseline only.
+## Testing
+
+Tests via `pytest` through `aota.invoke test.run`:
+
+```bash
+pytest tests/test_calculator_core.py tests/test_cli.py -v
+```
+
+## Implementation
+
+- `src/calculator/core.py` — add/sub/mul/div with division-by-zero
+- `src/calculator/cli.py` — argparse CLI with --json
+- `calc` — executable wrapper
