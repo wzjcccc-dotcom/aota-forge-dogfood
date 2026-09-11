@@ -15,3 +15,6 @@ def divide(a, b):
     if isinstance(a, int) and isinstance(b, int) and result.is_integer():
         return int(result)
     return result
+
+def max(a, b):
+    return a if a >= b else b

@@ -1,11 +1,11 @@
 import argparse
 import json
 import sys
-from .core import add, subtract, multiply, divide
+from .core import add, subtract, multiply, divide, max as calc_max
 
 def main():
     parser = argparse.ArgumentParser(prog="calc")
-    parser.add_argument("command", choices=["add", "sub", "mul", "div"], help="operation")
+    parser.add_argument("command", choices=["add", "sub", "mul", "div", "max"], help="operation")
     parser.add_argument("a", help="first operand")
     parser.add_argument("b", help="second operand")
     parser.add_argument("--json", action="store_true", help="json output")
@@ -36,6 +36,8 @@ def main():
             result = multiply(a, b)
         elif args.command == "div":
             result = divide(a, b)
+        elif args.command == "max":
+            result = calc_max(a, b)
     except ZeroDivisionError as e:
         msg = "division by zero"
         if args.json:
